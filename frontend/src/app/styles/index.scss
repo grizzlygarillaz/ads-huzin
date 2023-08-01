@@ -1,0 +1,73 @@
+@import "reset.css";
+@import 'normalize.css';
+@import 'scroll-bar';
+
+@import "primereact/resources/themes/mira/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+
+@import 'variables/global';
+
+@font-face {
+  font-family: Roboto;
+  src: url("/src/shared/assets/fonts/Roboto-Regular.ttf");
+}
+
+html,
+body {
+  overflow-y: scroll;
+  overflow-y: overlay;
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+  height: fill-available;
+
+  font-family: var(--font-family);
+
+  // margin: 0 auto;
+  font-size: var(--regular-font-size);
+  line-height: var(--regular-line-height);
+  color: var(--dark-color);
+
+  background-color: var(--background-color);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--dark-color);
+  text-decoration-color: transparent;
+  transition: text-decoration-color .2s;
+
+  &:hover {
+    text-decoration-color: var(--dark-color);
+  }
+}
+
+.p-component {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:not(.p-highlight, .p-datatable-emptymessage):hover {
+  filter: brightness(95%);
+}
+
+.p-disabled, .p-component:disabled {
+  opacity: 0.4;
+}
+
+.p-inline-message-error {
+  background-color: rgb(255 70 46 / 25%) !important;
+
+  & > span {
+    color: #df4d39 !important;
+  }
+}
