@@ -1,77 +1,30 @@
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+-- PostgreSQL database dump
 --
 
-CREATE SCHEMA public;
+\restrict 5CCBfHHEcHvaC589XVMX54DraNqEIcu3GLm9yOYk65os1FXU8wUBsPSqEdXKn6z
 
+-- Dumped from database version 18.1
+-- Dumped by pg_dump version 18.1
 
-ALTER SCHEMA public OWNER TO pg_database_owner;
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
-
---
--- Name: variable; Type: SCHEMA; Schema: -; Owner: root
---
-
-CREATE SCHEMA variable;
-
-
-ALTER SCHEMA variable OWNER TO root;
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: activity_log; Type: TABLE; Schema: public; Owner: root
---
-
-CREATE TABLE public.activity_log (
-    id bigint NOT NULL,
-    log_name character varying(255),
-    description text NOT NULL,
-    subject_type character varying(255),
-    subject_id bigint,
-    causer_type character varying(255),
-    causer_id bigint,
-    properties json,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    event character varying(255),
-    batch_uuid uuid
-);
-
-
-ALTER TABLE public.activity_log OWNER TO root;
-
---
--- Name: activity_log_id_seq; Type: SEQUENCE; Schema: public; Owner: root
---
-
-CREATE SEQUENCE public.activity_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.activity_log_id_seq OWNER TO root;
-
---
--- Name: activity_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
---
-
-ALTER SEQUENCE public.activity_log_id_seq OWNED BY public.activity_log.id;
-
-
---
--- Name: cache; Type: TABLE; Schema: public; Owner: root
+-- Name: cache; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.cache (
@@ -81,10 +34,10 @@ CREATE TABLE public.cache (
 );
 
 
-ALTER TABLE public.cache OWNER TO root;
+ALTER TABLE public.cache OWNER TO sail;
 
 --
--- Name: cache_locks; Type: TABLE; Schema: public; Owner: root
+-- Name: cache_locks; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.cache_locks (
@@ -94,22 +47,23 @@ CREATE TABLE public.cache_locks (
 );
 
 
-ALTER TABLE public.cache_locks OWNER TO root;
+ALTER TABLE public.cache_locks OWNER TO sail;
 
 --
--- Name: channel_types; Type: TABLE; Schema: public; Owner: root
+-- Name: channel_types; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.channel_types (
     id bigint NOT NULL,
+    code character varying(55) NOT NULL,
     name character varying(55) NOT NULL
 );
 
 
-ALTER TABLE public.channel_types OWNER TO root;
+ALTER TABLE public.channel_types OWNER TO sail;
 
 --
--- Name: channel_types_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: channel_types_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.channel_types_id_seq
@@ -120,17 +74,17 @@ CREATE SEQUENCE public.channel_types_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.channel_types_id_seq OWNER TO root;
+ALTER SEQUENCE public.channel_types_id_seq OWNER TO sail;
 
 --
--- Name: channel_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: channel_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.channel_types_id_seq OWNED BY public.channel_types.id;
 
 
 --
--- Name: channels; Type: TABLE; Schema: public; Owner: root
+-- Name: channels; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.channels (
@@ -147,10 +101,10 @@ CREATE TABLE public.channels (
 );
 
 
-ALTER TABLE public.channels OWNER TO root;
+ALTER TABLE public.channels OWNER TO sail;
 
 --
--- Name: channels_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: channels_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.channels_id_seq
@@ -161,17 +115,17 @@ CREATE SEQUENCE public.channels_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.channels_id_seq OWNER TO root;
+ALTER SEQUENCE public.channels_id_seq OWNER TO sail;
 
 --
--- Name: channels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: channels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 
 
 --
--- Name: cities; Type: TABLE; Schema: public; Owner: root
+-- Name: cities; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.cities (
@@ -187,10 +141,10 @@ CREATE TABLE public.cities (
 );
 
 
-ALTER TABLE public.cities OWNER TO root;
+ALTER TABLE public.cities OWNER TO sail;
 
 --
--- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.cities_id_seq
@@ -201,17 +155,17 @@ CREATE SEQUENCE public.cities_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.cities_id_seq OWNER TO root;
+ALTER SEQUENCE public.cities_id_seq OWNER TO sail;
 
 --
--- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.cities_id_seq OWNED BY public.cities.id;
 
 
 --
--- Name: city_names; Type: TABLE; Schema: public; Owner: root
+-- Name: city_names; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.city_names (
@@ -226,10 +180,10 @@ CREATE TABLE public.city_names (
 );
 
 
-ALTER TABLE public.city_names OWNER TO root;
+ALTER TABLE public.city_names OWNER TO sail;
 
 --
--- Name: city_names_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: city_names_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.city_names_id_seq
@@ -240,17 +194,17 @@ CREATE SEQUENCE public.city_names_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.city_names_id_seq OWNER TO root;
+ALTER SEQUENCE public.city_names_id_seq OWNER TO sail;
 
 --
--- Name: city_names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: city_names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.city_names_id_seq OWNED BY public.city_names.id;
 
 
 --
--- Name: failed_jobs; Type: TABLE; Schema: public; Owner: root
+-- Name: failed_jobs; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.failed_jobs (
@@ -264,10 +218,10 @@ CREATE TABLE public.failed_jobs (
 );
 
 
-ALTER TABLE public.failed_jobs OWNER TO root;
+ALTER TABLE public.failed_jobs OWNER TO sail;
 
 --
--- Name: failed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: failed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.failed_jobs_id_seq
@@ -278,17 +232,66 @@ CREATE SEQUENCE public.failed_jobs_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.failed_jobs_id_seq OWNER TO root;
+ALTER SEQUENCE public.failed_jobs_id_seq OWNER TO sail;
 
 --
--- Name: failed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: failed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.failed_jobs_id_seq OWNED BY public.failed_jobs.id;
 
 
 --
--- Name: job_batches; Type: TABLE; Schema: public; Owner: root
+-- Name: files; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.files (
+    id bigint NOT NULL,
+    disk character varying(55) DEFAULT 'local'::character varying NOT NULL,
+    path character varying(255) NOT NULL,
+    filename character varying(128) NOT NULL,
+    mime_type character varying(128),
+    size integer,
+    duration smallint,
+    width smallint,
+    height smallint,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.files OWNER TO sail;
+
+--
+-- Name: COLUMN files.size; Type: COMMENT; Schema: public; Owner: sail
+--
+
+COMMENT ON COLUMN public.files.size IS 'bytes';
+
+
+--
+-- Name: files_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.files_id_seq OWNER TO sail;
+
+--
+-- Name: files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.files_id_seq OWNED BY public.files.id;
+
+
+--
+-- Name: job_batches; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.job_batches (
@@ -305,10 +308,10 @@ CREATE TABLE public.job_batches (
 );
 
 
-ALTER TABLE public.job_batches OWNER TO root;
+ALTER TABLE public.job_batches OWNER TO sail;
 
 --
--- Name: jobs; Type: TABLE; Schema: public; Owner: root
+-- Name: jobs; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.jobs (
@@ -322,10 +325,10 @@ CREATE TABLE public.jobs (
 );
 
 
-ALTER TABLE public.jobs OWNER TO root;
+ALTER TABLE public.jobs OWNER TO sail;
 
 --
--- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.jobs_id_seq
@@ -336,17 +339,17 @@ CREATE SEQUENCE public.jobs_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.jobs_id_seq OWNER TO root;
+ALTER SEQUENCE public.jobs_id_seq OWNER TO sail;
 
 --
--- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.jobs_id_seq OWNED BY public.jobs.id;
 
 
 --
--- Name: migrations; Type: TABLE; Schema: public; Owner: root
+-- Name: migrations; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.migrations (
@@ -356,10 +359,10 @@ CREATE TABLE public.migrations (
 );
 
 
-ALTER TABLE public.migrations OWNER TO root;
+ALTER TABLE public.migrations OWNER TO sail;
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.migrations_id_seq
@@ -371,17 +374,17 @@ CREATE SEQUENCE public.migrations_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.migrations_id_seq OWNER TO root;
+ALTER SEQUENCE public.migrations_id_seq OWNER TO sail;
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
 
 
 --
--- Name: model_has_permissions; Type: TABLE; Schema: public; Owner: root
+-- Name: model_has_permissions; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.model_has_permissions (
@@ -391,10 +394,10 @@ CREATE TABLE public.model_has_permissions (
 );
 
 
-ALTER TABLE public.model_has_permissions OWNER TO root;
+ALTER TABLE public.model_has_permissions OWNER TO sail;
 
 --
--- Name: model_has_roles; Type: TABLE; Schema: public; Owner: root
+-- Name: model_has_roles; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.model_has_roles (
@@ -404,10 +407,10 @@ CREATE TABLE public.model_has_roles (
 );
 
 
-ALTER TABLE public.model_has_roles OWNER TO root;
+ALTER TABLE public.model_has_roles OWNER TO sail;
 
 --
--- Name: password_reset_tokens; Type: TABLE; Schema: public; Owner: root
+-- Name: password_reset_tokens; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.password_reset_tokens (
@@ -417,10 +420,10 @@ CREATE TABLE public.password_reset_tokens (
 );
 
 
-ALTER TABLE public.password_reset_tokens OWNER TO root;
+ALTER TABLE public.password_reset_tokens OWNER TO sail;
 
 --
--- Name: permissions; Type: TABLE; Schema: public; Owner: root
+-- Name: permissions; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.permissions (
@@ -432,10 +435,10 @@ CREATE TABLE public.permissions (
 );
 
 
-ALTER TABLE public.permissions OWNER TO root;
+ALTER TABLE public.permissions OWNER TO sail;
 
 --
--- Name: permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.permissions_id_seq
@@ -446,17 +449,17 @@ CREATE SEQUENCE public.permissions_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.permissions_id_seq OWNER TO root;
+ALTER SEQUENCE public.permissions_id_seq OWNER TO sail;
 
 --
--- Name: permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.permissions_id_seq OWNED BY public.permissions.id;
 
 
 --
--- Name: personal_access_tokens; Type: TABLE; Schema: public; Owner: root
+-- Name: personal_access_tokens; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.personal_access_tokens (
@@ -473,10 +476,10 @@ CREATE TABLE public.personal_access_tokens (
 );
 
 
-ALTER TABLE public.personal_access_tokens OWNER TO root;
+ALTER TABLE public.personal_access_tokens OWNER TO sail;
 
 --
--- Name: personal_access_tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: personal_access_tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.personal_access_tokens_id_seq
@@ -487,17 +490,17 @@ CREATE SEQUENCE public.personal_access_tokens_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.personal_access_tokens_id_seq OWNER TO root;
+ALTER SEQUENCE public.personal_access_tokens_id_seq OWNER TO sail;
 
 --
--- Name: personal_access_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: personal_access_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.personal_access_tokens_id_seq OWNED BY public.personal_access_tokens.id;
 
 
 --
--- Name: projects; Type: TABLE; Schema: public; Owner: root
+-- Name: projects; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.projects (
@@ -511,10 +514,184 @@ CREATE TABLE public.projects (
 );
 
 
-ALTER TABLE public.projects OWNER TO root;
+ALTER TABLE public.projects OWNER TO sail;
 
 --
--- Name: role_has_permissions; Type: TABLE; Schema: public; Owner: root
+-- Name: publication_channel_files; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.publication_channel_files (
+    id bigint NOT NULL,
+    channel_id bigint NOT NULL,
+    file_id bigint NOT NULL,
+    external_id character varying(255) NOT NULL,
+    meta jsonb,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.publication_channel_files OWNER TO sail;
+
+--
+-- Name: TABLE publication_channel_files; Type: COMMENT; Schema: public; Owner: sail
+--
+
+COMMENT ON TABLE public.publication_channel_files IS 'Files stored on an external channel server';
+
+
+--
+-- Name: publication_channel_files_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.publication_channel_files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.publication_channel_files_id_seq OWNER TO sail;
+
+--
+-- Name: publication_channel_files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.publication_channel_files_id_seq OWNED BY public.publication_channel_files.id;
+
+
+--
+-- Name: publication_external_ids; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.publication_external_ids (
+    id bigint NOT NULL,
+    external_id character varying(255) NOT NULL,
+    publication_id bigint NOT NULL,
+    stage character varying(255) DEFAULT 'published'::character varying NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    CONSTRAINT publication_external_ids_stage_check CHECK (((stage)::text = ANY ((ARRAY['scheduled'::character varying, 'published'::character varying, 'edited'::character varying, 'deleted'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.publication_external_ids OWNER TO sail;
+
+--
+-- Name: publication_external_ids_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.publication_external_ids_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.publication_external_ids_id_seq OWNER TO sail;
+
+--
+-- Name: publication_external_ids_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.publication_external_ids_id_seq OWNED BY public.publication_external_ids.id;
+
+
+--
+-- Name: publication_file; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.publication_file (
+    publication_id bigint NOT NULL,
+    file_id bigint NOT NULL,
+    "position" smallint DEFAULT '0'::smallint NOT NULL,
+    created_at timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public.publication_file OWNER TO sail;
+
+--
+-- Name: publication_types; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.publication_types (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.publication_types OWNER TO sail;
+
+--
+-- Name: publication_types_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.publication_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.publication_types_id_seq OWNER TO sail;
+
+--
+-- Name: publication_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.publication_types_id_seq OWNED BY public.publication_types.id;
+
+
+--
+-- Name: publications; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.publications (
+    id bigint NOT NULL,
+    body text,
+    status character varying(255) DEFAULT 'pending'::character varying NOT NULL,
+    options jsonb,
+    last_error jsonb,
+    publication_type_id bigint NOT NULL,
+    channel_id bigint NOT NULL,
+    expires_at timestamp(0) without time zone,
+    scheduled_at timestamp(0) without time zone,
+    published_at timestamp(0) without time zone,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    CONSTRAINT publications_status_check CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'scheduled'::character varying, 'published'::character varying, 'failed'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.publications OWNER TO sail;
+
+--
+-- Name: publications_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.publications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.publications_id_seq OWNER TO sail;
+
+--
+-- Name: publications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.publications_id_seq OWNED BY public.publications.id;
+
+
+--
+-- Name: role_has_permissions; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.role_has_permissions (
@@ -523,10 +700,10 @@ CREATE TABLE public.role_has_permissions (
 );
 
 
-ALTER TABLE public.role_has_permissions OWNER TO root;
+ALTER TABLE public.role_has_permissions OWNER TO sail;
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: root
+-- Name: roles; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.roles (
@@ -538,10 +715,10 @@ CREATE TABLE public.roles (
 );
 
 
-ALTER TABLE public.roles OWNER TO root;
+ALTER TABLE public.roles OWNER TO sail;
 
 --
--- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
 CREATE SEQUENCE public.roles_id_seq
@@ -552,17 +729,17 @@ CREATE SEQUENCE public.roles_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.roles_id_seq OWNER TO root;
+ALTER SEQUENCE public.roles_id_seq OWNER TO sail;
 
 --
--- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
 ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
 
 
 --
--- Name: sessions; Type: TABLE; Schema: public; Owner: root
+-- Name: sessions; Type: TABLE; Schema: public; Owner: sail
 --
 
 CREATE TABLE public.sessions (
@@ -575,53 +752,13 @@ CREATE TABLE public.sessions (
 );
 
 
-ALTER TABLE public.sessions OWNER TO root;
+ALTER TABLE public.sessions OWNER TO sail;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: root
+-- Name: template_definitions; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE public.users (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    login character varying(255) NOT NULL,
-    email character varying(255),
-    email_verified_at timestamp(0) without time zone,
-    password character varying(255) NOT NULL,
-    remember_token character varying(100),
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
-);
-
-
-ALTER TABLE public.users OWNER TO root;
-
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: root
---
-
-CREATE SEQUENCE public.users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.users_id_seq OWNER TO root;
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
---
-
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-
-
---
--- Name: definitions; Type: TABLE; Schema: variable; Owner: root
---
-
-CREATE TABLE variable.definitions (
+CREATE TABLE public.template_definitions (
     key character varying(55) NOT NULL,
     default_value character varying(255),
     description character varying(255),
@@ -635,25 +772,25 @@ CREATE TABLE variable.definitions (
 );
 
 
-ALTER TABLE variable.definitions OWNER TO root;
+ALTER TABLE public.template_definitions OWNER TO sail;
 
 --
--- Name: param_types; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_param_types; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.param_types (
+CREATE TABLE public.template_param_types (
     id bigint NOT NULL,
     name character varying(55) NOT NULL
 );
 
 
-ALTER TABLE variable.param_types OWNER TO root;
+ALTER TABLE public.template_param_types OWNER TO sail;
 
 --
--- Name: param_types_id_seq; Type: SEQUENCE; Schema: variable; Owner: root
+-- Name: template_param_types_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
-CREATE SEQUENCE variable.param_types_id_seq
+CREATE SEQUENCE public.template_param_types_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -661,20 +798,20 @@ CREATE SEQUENCE variable.param_types_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE variable.param_types_id_seq OWNER TO root;
+ALTER SEQUENCE public.template_param_types_id_seq OWNER TO sail;
 
 --
--- Name: param_types_id_seq; Type: SEQUENCE OWNED BY; Schema: variable; Owner: root
+-- Name: template_param_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
-ALTER SEQUENCE variable.param_types_id_seq OWNED BY variable.param_types.id;
+ALTER SEQUENCE public.template_param_types_id_seq OWNED BY public.template_param_types.id;
 
 
 --
--- Name: param_values; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_param_values; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.param_values (
+CREATE TABLE public.template_param_values (
     id bigint NOT NULL,
     key character varying(55) NOT NULL,
     value character varying(255) NOT NULL,
@@ -684,13 +821,13 @@ CREATE TABLE variable.param_values (
 );
 
 
-ALTER TABLE variable.param_values OWNER TO root;
+ALTER TABLE public.template_param_values OWNER TO sail;
 
 --
--- Name: param_values_id_seq; Type: SEQUENCE; Schema: variable; Owner: root
+-- Name: template_param_values_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
-CREATE SEQUENCE variable.param_values_id_seq
+CREATE SEQUENCE public.template_param_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -698,38 +835,37 @@ CREATE SEQUENCE variable.param_values_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE variable.param_values_id_seq OWNER TO root;
+ALTER SEQUENCE public.template_param_values_id_seq OWNER TO sail;
 
 --
--- Name: param_values_id_seq; Type: SEQUENCE OWNED BY; Schema: variable; Owner: root
+-- Name: template_param_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
-ALTER SEQUENCE variable.param_values_id_seq OWNED BY variable.param_values.id;
+ALTER SEQUENCE public.template_param_values_id_seq OWNED BY public.template_param_values.id;
 
 
 --
--- Name: params; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_params; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.params (
+CREATE TABLE public.template_params (
     id bigint NOT NULL,
     key character varying(55) NOT NULL,
     default_value character varying(255),
     param_type_id bigint NOT NULL,
-    "order" smallint DEFAULT '0'::smallint NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone,
     resolver character varying(55) NOT NULL
 );
 
 
-ALTER TABLE variable.params OWNER TO root;
+ALTER TABLE public.template_params OWNER TO sail;
 
 --
--- Name: params_id_seq; Type: SEQUENCE; Schema: variable; Owner: root
+-- Name: template_params_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
-CREATE SEQUENCE variable.params_id_seq
+CREATE SEQUENCE public.template_params_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -737,20 +873,20 @@ CREATE SEQUENCE variable.params_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE variable.params_id_seq OWNER TO root;
+ALTER SEQUENCE public.template_params_id_seq OWNER TO sail;
 
 --
--- Name: params_id_seq; Type: SEQUENCE OWNED BY; Schema: variable; Owner: root
+-- Name: template_params_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
-ALTER SEQUENCE variable.params_id_seq OWNED BY variable.params.id;
+ALTER SEQUENCE public.template_params_id_seq OWNED BY public.template_params.id;
 
 
 --
--- Name: resolvers; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_resolvers; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.resolvers (
+CREATE TABLE public.template_resolvers (
     key character varying(55) NOT NULL,
     description character varying(255),
     created_at timestamp(0) without time zone,
@@ -758,13 +894,13 @@ CREATE TABLE variable.resolvers (
 );
 
 
-ALTER TABLE variable.resolvers OWNER TO root;
+ALTER TABLE public.template_resolvers OWNER TO sail;
 
 --
--- Name: variable_param_values; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_variable_params; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.variable_param_values (
+CREATE TABLE public.template_variable_params (
     id bigint NOT NULL,
     value character varying(255),
     param_id bigint NOT NULL,
@@ -775,13 +911,13 @@ CREATE TABLE variable.variable_param_values (
 );
 
 
-ALTER TABLE variable.variable_param_values OWNER TO root;
+ALTER TABLE public.template_variable_params OWNER TO sail;
 
 --
--- Name: variable_param_values_id_seq; Type: SEQUENCE; Schema: variable; Owner: root
+-- Name: template_variable_params_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
-CREATE SEQUENCE variable.variable_param_values_id_seq
+CREATE SEQUENCE public.template_variable_params_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -789,20 +925,20 @@ CREATE SEQUENCE variable.variable_param_values_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE variable.variable_param_values_id_seq OWNER TO root;
+ALTER SEQUENCE public.template_variable_params_id_seq OWNER TO sail;
 
 --
--- Name: variable_param_values_id_seq; Type: SEQUENCE OWNED BY; Schema: variable; Owner: root
+-- Name: template_variable_params_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
-ALTER SEQUENCE variable.variable_param_values_id_seq OWNED BY variable.variable_param_values.id;
+ALTER SEQUENCE public.template_variable_params_id_seq OWNED BY public.template_variable_params.id;
 
 
 --
--- Name: variables; Type: TABLE; Schema: variable; Owner: root
+-- Name: template_variables; Type: TABLE; Schema: public; Owner: sail
 --
 
-CREATE TABLE variable.variables (
+CREATE TABLE public.template_variables (
     id bigint NOT NULL,
     value character varying(255),
     project_uuid uuid NOT NULL,
@@ -814,13 +950,13 @@ CREATE TABLE variable.variables (
 );
 
 
-ALTER TABLE variable.variables OWNER TO root;
+ALTER TABLE public.template_variables OWNER TO sail;
 
 --
--- Name: variables_id_seq; Type: SEQUENCE; Schema: variable; Owner: root
+-- Name: template_variables_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
 --
 
-CREATE SEQUENCE variable.variables_id_seq
+CREATE SEQUENCE public.template_variables_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -828,144 +964,205 @@ CREATE SEQUENCE variable.variables_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE variable.variables_id_seq OWNER TO root;
+ALTER SEQUENCE public.template_variables_id_seq OWNER TO sail;
 
 --
--- Name: variables_id_seq; Type: SEQUENCE OWNED BY; Schema: variable; Owner: root
+-- Name: template_variables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
 --
 
-ALTER SEQUENCE variable.variables_id_seq OWNED BY variable.variables.id;
-
-
---
--- Name: activity_log id; Type: DEFAULT; Schema: public; Owner: root
---
-
-ALTER TABLE ONLY public.activity_log ALTER COLUMN id SET DEFAULT nextval('public.activity_log_id_seq'::regclass);
+ALTER SEQUENCE public.template_variables_id_seq OWNED BY public.template_variables.id;
 
 
 --
--- Name: channel_types id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: users; Type: TABLE; Schema: public; Owner: sail
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    login character varying(255) NOT NULL,
+    email character varying(255),
+    email_verified_at timestamp(0) without time zone,
+    password character varying(255) NOT NULL,
+    remember_token character varying(100),
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO sail;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: sail
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.users_id_seq OWNER TO sail;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sail
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: channel_types id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channel_types ALTER COLUMN id SET DEFAULT nextval('public.channel_types_id_seq'::regclass);
 
 
 --
--- Name: channels id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: channels id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels ALTER COLUMN id SET DEFAULT nextval('public.channels_id_seq'::regclass);
 
 
 --
--- Name: cities id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: cities id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.cities ALTER COLUMN id SET DEFAULT nextval('public.cities_id_seq'::regclass);
 
 
 --
--- Name: city_names id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: city_names id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.city_names ALTER COLUMN id SET DEFAULT nextval('public.city_names_id_seq'::regclass);
 
 
 --
--- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.failed_jobs ALTER COLUMN id SET DEFAULT nextval('public.failed_jobs_id_seq'::regclass);
 
 
 --
--- Name: jobs id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: files id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.files ALTER COLUMN id SET DEFAULT nextval('public.files_id_seq'::regclass);
+
+
+--
+-- Name: jobs id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.jobs ALTER COLUMN id SET DEFAULT nextval('public.jobs_id_seq'::regclass);
 
 
 --
--- Name: migrations id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
 
 
 --
--- Name: permissions id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: permissions id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.permissions ALTER COLUMN id SET DEFAULT nextval('public.permissions_id_seq'::regclass);
 
 
 --
--- Name: personal_access_tokens id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: personal_access_tokens id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.personal_access_tokens ALTER COLUMN id SET DEFAULT nextval('public.personal_access_tokens_id_seq'::regclass);
 
 
 --
--- Name: roles id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: publication_channel_files id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_channel_files ALTER COLUMN id SET DEFAULT nextval('public.publication_channel_files_id_seq'::regclass);
+
+
+--
+-- Name: publication_external_ids id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_external_ids ALTER COLUMN id SET DEFAULT nextval('public.publication_external_ids_id_seq'::regclass);
+
+
+--
+-- Name: publication_types id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_types ALTER COLUMN id SET DEFAULT nextval('public.publication_types_id_seq'::regclass);
+
+
+--
+-- Name: publications id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publications ALTER COLUMN id SET DEFAULT nextval('public.publications_id_seq'::regclass);
+
+
+--
+-- Name: roles id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: template_param_types id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_types ALTER COLUMN id SET DEFAULT nextval('public.template_param_types_id_seq'::regclass);
+
+
+--
+-- Name: template_param_values id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_values ALTER COLUMN id SET DEFAULT nextval('public.template_param_values_id_seq'::regclass);
+
+
+--
+-- Name: template_params id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_params ALTER COLUMN id SET DEFAULT nextval('public.template_params_id_seq'::regclass);
+
+
+--
+-- Name: template_variable_params id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variable_params ALTER COLUMN id SET DEFAULT nextval('public.template_variable_params_id_seq'::regclass);
+
+
+--
+-- Name: template_variables id; Type: DEFAULT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables ALTER COLUMN id SET DEFAULT nextval('public.template_variables_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Name: param_types id; Type: DEFAULT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_types ALTER COLUMN id SET DEFAULT nextval('variable.param_types_id_seq'::regclass);
-
-
---
--- Name: param_values id; Type: DEFAULT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_values ALTER COLUMN id SET DEFAULT nextval('variable.param_values_id_seq'::regclass);
-
-
---
--- Name: params id; Type: DEFAULT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.params ALTER COLUMN id SET DEFAULT nextval('variable.params_id_seq'::regclass);
-
-
---
--- Name: variable_param_values id; Type: DEFAULT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variable_param_values ALTER COLUMN id SET DEFAULT nextval('variable.variable_param_values_id_seq'::regclass);
-
-
---
--- Name: variables id; Type: DEFAULT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variables ALTER COLUMN id SET DEFAULT nextval('variable.variables_id_seq'::regclass);
-
-
---
--- Name: activity_log activity_log_pkey; Type: CONSTRAINT; Schema: public; Owner: root
---
-
-ALTER TABLE ONLY public.activity_log
-    ADD CONSTRAINT activity_log_pkey PRIMARY KEY (id);
-
-
---
--- Name: cache_locks cache_locks_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: cache_locks cache_locks_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.cache_locks
@@ -973,7 +1170,7 @@ ALTER TABLE ONLY public.cache_locks
 
 
 --
--- Name: cache cache_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: cache cache_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.cache
@@ -981,15 +1178,15 @@ ALTER TABLE ONLY public.cache
 
 
 --
--- Name: channel_types channel_types_name_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: channel_types channel_types_code_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channel_types
-    ADD CONSTRAINT channel_types_name_unique UNIQUE (name);
+    ADD CONSTRAINT channel_types_code_unique UNIQUE (code);
 
 
 --
--- Name: channel_types channel_types_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: channel_types channel_types_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channel_types
@@ -997,7 +1194,7 @@ ALTER TABLE ONLY public.channel_types
 
 
 --
--- Name: channels channels_name_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: channels channels_name_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels
@@ -1005,7 +1202,7 @@ ALTER TABLE ONLY public.channels
 
 
 --
--- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels
@@ -1013,7 +1210,7 @@ ALTER TABLE ONLY public.channels
 
 
 --
--- Name: channels channels_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: channels channels_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels
@@ -1021,7 +1218,7 @@ ALTER TABLE ONLY public.channels
 
 
 --
--- Name: cities cities_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: cities cities_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.cities
@@ -1029,7 +1226,7 @@ ALTER TABLE ONLY public.cities
 
 
 --
--- Name: city_names city_names_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: city_names city_names_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.city_names
@@ -1037,7 +1234,7 @@ ALTER TABLE ONLY public.city_names
 
 
 --
--- Name: failed_jobs failed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: failed_jobs failed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.failed_jobs
@@ -1045,7 +1242,7 @@ ALTER TABLE ONLY public.failed_jobs
 
 
 --
--- Name: failed_jobs failed_jobs_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: failed_jobs failed_jobs_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.failed_jobs
@@ -1053,7 +1250,15 @@ ALTER TABLE ONLY public.failed_jobs
 
 
 --
--- Name: job_batches job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: files files_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.files
+    ADD CONSTRAINT files_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: job_batches job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.job_batches
@@ -1061,7 +1266,7 @@ ALTER TABLE ONLY public.job_batches
 
 
 --
--- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.jobs
@@ -1069,7 +1274,7 @@ ALTER TABLE ONLY public.jobs
 
 
 --
--- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.migrations
@@ -1077,7 +1282,7 @@ ALTER TABLE ONLY public.migrations
 
 
 --
--- Name: model_has_permissions model_has_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: model_has_permissions model_has_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.model_has_permissions
@@ -1085,7 +1290,7 @@ ALTER TABLE ONLY public.model_has_permissions
 
 
 --
--- Name: model_has_roles model_has_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: model_has_roles model_has_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.model_has_roles
@@ -1093,7 +1298,7 @@ ALTER TABLE ONLY public.model_has_roles
 
 
 --
--- Name: password_reset_tokens password_reset_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: password_reset_tokens password_reset_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.password_reset_tokens
@@ -1101,7 +1306,7 @@ ALTER TABLE ONLY public.password_reset_tokens
 
 
 --
--- Name: permissions permissions_name_guard_name_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: permissions permissions_name_guard_name_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.permissions
@@ -1109,7 +1314,7 @@ ALTER TABLE ONLY public.permissions
 
 
 --
--- Name: permissions permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: permissions permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.permissions
@@ -1117,7 +1322,7 @@ ALTER TABLE ONLY public.permissions
 
 
 --
--- Name: personal_access_tokens personal_access_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: personal_access_tokens personal_access_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.personal_access_tokens
@@ -1125,7 +1330,7 @@ ALTER TABLE ONLY public.personal_access_tokens
 
 
 --
--- Name: personal_access_tokens personal_access_tokens_token_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: personal_access_tokens personal_access_tokens_token_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.personal_access_tokens
@@ -1133,7 +1338,7 @@ ALTER TABLE ONLY public.personal_access_tokens
 
 
 --
--- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.projects
@@ -1141,7 +1346,71 @@ ALTER TABLE ONLY public.projects
 
 
 --
--- Name: role_has_permissions role_has_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: publication_channel_files publication_channel_files_channel_id_file_id_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_channel_files
+    ADD CONSTRAINT publication_channel_files_channel_id_file_id_unique UNIQUE (channel_id, file_id);
+
+
+--
+-- Name: publication_channel_files publication_channel_files_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_channel_files
+    ADD CONSTRAINT publication_channel_files_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: publication_external_ids publication_external_ids_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_external_ids
+    ADD CONSTRAINT publication_external_ids_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: publication_external_ids publication_external_ids_publication_id_stage_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_external_ids
+    ADD CONSTRAINT publication_external_ids_publication_id_stage_unique UNIQUE (publication_id, stage);
+
+
+--
+-- Name: publication_file publication_file_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_file
+    ADD CONSTRAINT publication_file_pkey PRIMARY KEY (publication_id, file_id);
+
+
+--
+-- Name: publication_file publication_file_publication_id_position_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_file
+    ADD CONSTRAINT publication_file_publication_id_position_unique UNIQUE (publication_id, "position");
+
+
+--
+-- Name: publication_types publication_types_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_types
+    ADD CONSTRAINT publication_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: publications publications_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publications
+    ADD CONSTRAINT publications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: role_has_permissions role_has_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.role_has_permissions
@@ -1149,7 +1418,7 @@ ALTER TABLE ONLY public.role_has_permissions
 
 
 --
--- Name: roles roles_name_guard_name_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: roles roles_name_guard_name_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.roles
@@ -1157,7 +1426,7 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.roles
@@ -1165,7 +1434,7 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.sessions
@@ -1173,7 +1442,111 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: template_definitions template_definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_definitions
+    ADD CONSTRAINT template_definitions_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: template_definitions template_definitions_project_uuid_key_channel_id_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_definitions
+    ADD CONSTRAINT template_definitions_project_uuid_key_channel_id_unique UNIQUE (project_uuid, key, channel_id);
+
+
+--
+-- Name: template_param_types template_param_types_name_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_types
+    ADD CONSTRAINT template_param_types_name_unique UNIQUE (name);
+
+
+--
+-- Name: template_param_types template_param_types_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_types
+    ADD CONSTRAINT template_param_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: template_param_values template_param_values_param_id_key_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_values
+    ADD CONSTRAINT template_param_values_param_id_key_unique UNIQUE (param_id, key);
+
+
+--
+-- Name: template_param_values template_param_values_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_param_values
+    ADD CONSTRAINT template_param_values_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: template_params template_params_key_resolver_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_params
+    ADD CONSTRAINT template_params_key_resolver_unique UNIQUE (key, resolver);
+
+
+--
+-- Name: template_params template_params_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_params
+    ADD CONSTRAINT template_params_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: template_resolvers template_resolvers_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_resolvers
+    ADD CONSTRAINT template_resolvers_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: template_variable_params template_variable_params_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variable_params
+    ADD CONSTRAINT template_variable_params_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: template_variable_params template_variable_params_variable_id_param_id_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variable_params
+    ADD CONSTRAINT template_variable_params_variable_id_param_id_unique UNIQUE (variable_id, param_id);
+
+
+--
+-- Name: template_variables template_variables_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: template_variables template_variables_project_uuid_key_channel_id_unique; Type: CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_project_uuid_key_channel_id_unique UNIQUE (project_uuid, key, channel_id);
+
+
+--
+-- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.users
@@ -1181,7 +1554,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_login_unique; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: users users_login_unique; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.users
@@ -1189,7 +1562,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.users
@@ -1197,216 +1570,91 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: definitions definitions_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.definitions
-    ADD CONSTRAINT definitions_pkey PRIMARY KEY (key);
-
-
---
--- Name: param_types param_types_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_types
-    ADD CONSTRAINT param_types_pkey PRIMARY KEY (id);
-
-
---
--- Name: param_values param_values_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_values
-    ADD CONSTRAINT param_values_pkey PRIMARY KEY (id);
-
-
---
--- Name: params params_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.params
-    ADD CONSTRAINT params_pkey PRIMARY KEY (id);
-
-
---
--- Name: resolvers resolvers_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.resolvers
-    ADD CONSTRAINT resolvers_pkey PRIMARY KEY (key);
-
-
---
--- Name: definitions variable_definitions_project_uuid_key_channel_id_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.definitions
-    ADD CONSTRAINT variable_definitions_project_uuid_key_channel_id_unique UNIQUE (project_uuid, key, channel_id);
-
-
---
--- Name: param_types variable_param_types_name_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_types
-    ADD CONSTRAINT variable_param_types_name_unique UNIQUE (name);
-
-
---
--- Name: param_values variable_param_values_param_id_key_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_values
-    ADD CONSTRAINT variable_param_values_param_id_key_unique UNIQUE (param_id, key);
-
-
---
--- Name: variable_param_values variable_param_values_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variable_param_values
-    ADD CONSTRAINT variable_param_values_pkey PRIMARY KEY (id);
-
-
---
--- Name: params variable_params_key_resolver_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.params
-    ADD CONSTRAINT variable_params_key_resolver_unique UNIQUE (key, resolver);
-
-
---
--- Name: variable_param_values variable_variable_param_values_variable_id_param_id_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variable_param_values
-    ADD CONSTRAINT variable_variable_param_values_variable_id_param_id_unique UNIQUE (variable_id, param_id);
-
-
---
--- Name: variables variable_variables_project_uuid_key_channel_id_unique; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variable_variables_project_uuid_key_channel_id_unique UNIQUE (project_uuid, key, channel_id);
-
-
---
--- Name: variables variables_pkey; Type: CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variables_pkey PRIMARY KEY (id);
-
-
---
--- Name: activity_log_log_name_index; Type: INDEX; Schema: public; Owner: root
---
-
-CREATE INDEX activity_log_log_name_index ON public.activity_log USING btree (log_name);
-
-
---
--- Name: causer; Type: INDEX; Schema: public; Owner: root
---
-
-CREATE INDEX causer ON public.activity_log USING btree (causer_type, causer_id);
-
-
---
--- Name: cities_country_code_index; Type: INDEX; Schema: public; Owner: root
+-- Name: cities_country_code_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX cities_country_code_index ON public.cities USING btree (country_code);
 
 
 --
--- Name: cities_timezone_index; Type: INDEX; Schema: public; Owner: root
+-- Name: cities_timezone_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX cities_timezone_index ON public.cities USING btree (timezone);
 
 
 --
--- Name: city_names_city_id_language_index; Type: INDEX; Schema: public; Owner: root
+-- Name: city_names_city_id_language_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX city_names_city_id_language_index ON public.city_names USING btree (city_id, language);
 
 
 --
--- Name: jobs_queue_index; Type: INDEX; Schema: public; Owner: root
+-- Name: jobs_queue_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX jobs_queue_index ON public.jobs USING btree (queue);
 
 
 --
--- Name: model_has_permissions_model_id_model_type_index; Type: INDEX; Schema: public; Owner: root
+-- Name: model_has_permissions_model_id_model_type_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX model_has_permissions_model_id_model_type_index ON public.model_has_permissions USING btree (model_id, model_type);
 
 
 --
--- Name: model_has_roles_model_id_model_type_index; Type: INDEX; Schema: public; Owner: root
+-- Name: model_has_roles_model_id_model_type_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX model_has_roles_model_id_model_type_index ON public.model_has_roles USING btree (model_id, model_type);
 
 
 --
--- Name: personal_access_tokens_expires_at_index; Type: INDEX; Schema: public; Owner: root
+-- Name: personal_access_tokens_expires_at_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX personal_access_tokens_expires_at_index ON public.personal_access_tokens USING btree (expires_at);
 
 
 --
--- Name: personal_access_tokens_tokenable_type_tokenable_id_index; Type: INDEX; Schema: public; Owner: root
+-- Name: personal_access_tokens_tokenable_type_tokenable_id_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX personal_access_tokens_tokenable_type_tokenable_id_index ON public.personal_access_tokens USING btree (tokenable_type, tokenable_id);
 
 
 --
--- Name: sessions_last_activity_index; Type: INDEX; Schema: public; Owner: root
+-- Name: sessions_last_activity_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX sessions_last_activity_index ON public.sessions USING btree (last_activity);
 
 
 --
--- Name: sessions_user_id_index; Type: INDEX; Schema: public; Owner: root
+-- Name: sessions_user_id_index; Type: INDEX; Schema: public; Owner: sail
 --
 
 CREATE INDEX sessions_user_id_index ON public.sessions USING btree (user_id);
 
 
 --
--- Name: subject; Type: INDEX; Schema: public; Owner: root
+-- Name: template_variables_project_uuid_channel_id_index; Type: INDEX; Schema: public; Owner: sail
 --
 
-CREATE INDEX subject ON public.activity_log USING btree (subject_type, subject_id);
-
-
---
--- Name: variable_variables_project_uuid_channel_id_index; Type: INDEX; Schema: variable; Owner: root
---
-
-CREATE INDEX variable_variables_project_uuid_channel_id_index ON variable.variables USING btree (project_uuid, channel_id);
+CREATE INDEX template_variables_project_uuid_channel_id_index ON public.template_variables USING btree (project_uuid, channel_id);
 
 
 --
--- Name: variable_variables_resolver_index; Type: INDEX; Schema: variable; Owner: root
+-- Name: template_variables_resolver_index; Type: INDEX; Schema: public; Owner: sail
 --
 
-CREATE INDEX variable_variables_resolver_index ON variable.variables USING btree (resolver);
+CREATE INDEX template_variables_resolver_index ON public.template_variables USING btree (resolver);
 
 
 --
--- Name: channels channels_channel_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: channels channels_channel_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels
@@ -1414,7 +1662,7 @@ ALTER TABLE ONLY public.channels
 
 
 --
--- Name: channels channels_project_uuid_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: channels channels_project_uuid_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.channels
@@ -1422,7 +1670,7 @@ ALTER TABLE ONLY public.channels
 
 
 --
--- Name: city_names city_names_city_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: city_names city_names_city_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.city_names
@@ -1430,7 +1678,7 @@ ALTER TABLE ONLY public.city_names
 
 
 --
--- Name: model_has_permissions model_has_permissions_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: model_has_permissions model_has_permissions_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.model_has_permissions
@@ -1438,7 +1686,7 @@ ALTER TABLE ONLY public.model_has_permissions
 
 
 --
--- Name: model_has_roles model_has_roles_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: model_has_roles model_has_roles_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.model_has_roles
@@ -1446,7 +1694,7 @@ ALTER TABLE ONLY public.model_has_roles
 
 
 --
--- Name: projects projects_city_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: projects projects_city_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.projects
@@ -1454,7 +1702,63 @@ ALTER TABLE ONLY public.projects
 
 
 --
--- Name: role_has_permissions role_has_permissions_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: publication_channel_files publication_channel_files_channel_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_channel_files
+    ADD CONSTRAINT publication_channel_files_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id);
+
+
+--
+-- Name: publication_channel_files publication_channel_files_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_channel_files
+    ADD CONSTRAINT publication_channel_files_file_id_foreign FOREIGN KEY (file_id) REFERENCES public.files(id);
+
+
+--
+-- Name: publication_external_ids publication_external_ids_publication_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_external_ids
+    ADD CONSTRAINT publication_external_ids_publication_id_foreign FOREIGN KEY (publication_id) REFERENCES public.publications(id);
+
+
+--
+-- Name: publication_file publication_file_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_file
+    ADD CONSTRAINT publication_file_file_id_foreign FOREIGN KEY (file_id) REFERENCES public.files(id);
+
+
+--
+-- Name: publication_file publication_file_publication_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publication_file
+    ADD CONSTRAINT publication_file_publication_id_foreign FOREIGN KEY (publication_id) REFERENCES public.publications(id);
+
+
+--
+-- Name: publications publications_channel_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publications
+    ADD CONSTRAINT publications_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id);
+
+
+--
+-- Name: publications publications_publication_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.publications
+    ADD CONSTRAINT publications_publication_type_id_foreign FOREIGN KEY (publication_type_id) REFERENCES public.publication_types(id);
+
+
+--
+-- Name: role_has_permissions role_has_permissions_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.role_has_permissions
@@ -1462,7 +1766,7 @@ ALTER TABLE ONLY public.role_has_permissions
 
 
 --
--- Name: role_has_permissions role_has_permissions_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: role_has_permissions role_has_permissions_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
 ALTER TABLE ONLY public.role_has_permissions
@@ -1470,105 +1774,112 @@ ALTER TABLE ONLY public.role_has_permissions
 
 
 --
--- Name: definitions variable_definitions_channel_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_definitions template_definitions_channel_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.definitions
-    ADD CONSTRAINT variable_definitions_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id) ON DELETE CASCADE;
-
-
---
--- Name: definitions variable_definitions_project_uuid_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.definitions
-    ADD CONSTRAINT variable_definitions_project_uuid_foreign FOREIGN KEY (project_uuid) REFERENCES public.projects(uuid) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_definitions
+    ADD CONSTRAINT template_definitions_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id) ON DELETE CASCADE;
 
 
 --
--- Name: definitions variable_definitions_resolver_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_definitions template_definitions_project_uuid_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.definitions
-    ADD CONSTRAINT variable_definitions_resolver_foreign FOREIGN KEY (resolver) REFERENCES variable.resolvers(key) ON DELETE CASCADE;
-
-
---
--- Name: param_values variable_param_values_param_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.param_values
-    ADD CONSTRAINT variable_param_values_param_id_foreign FOREIGN KEY (param_id) REFERENCES variable.params(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_definitions
+    ADD CONSTRAINT template_definitions_project_uuid_foreign FOREIGN KEY (project_uuid) REFERENCES public.projects(uuid) ON DELETE CASCADE;
 
 
 --
--- Name: params variable_params_param_type_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_definitions template_definitions_resolver_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.params
-    ADD CONSTRAINT variable_params_param_type_id_foreign FOREIGN KEY (param_type_id) REFERENCES variable.param_types(id);
-
-
---
--- Name: params variable_params_resolver_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.params
-    ADD CONSTRAINT variable_params_resolver_foreign FOREIGN KEY (resolver) REFERENCES variable.resolvers(key) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_definitions
+    ADD CONSTRAINT template_definitions_resolver_foreign FOREIGN KEY (resolver) REFERENCES public.template_resolvers(key) ON DELETE CASCADE;
 
 
 --
--- Name: variable_param_values variable_variable_param_values_param_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_param_values template_param_values_param_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.variable_param_values
-    ADD CONSTRAINT variable_variable_param_values_param_id_foreign FOREIGN KEY (param_id) REFERENCES variable.params(id) ON DELETE CASCADE;
-
-
---
--- Name: variable_param_values variable_variable_param_values_param_value_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variable_param_values
-    ADD CONSTRAINT variable_variable_param_values_param_value_id_foreign FOREIGN KEY (param_value_id) REFERENCES variable.param_values(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_param_values
+    ADD CONSTRAINT template_param_values_param_id_foreign FOREIGN KEY (param_id) REFERENCES public.template_params(id) ON DELETE CASCADE;
 
 
 --
--- Name: variable_param_values variable_variable_param_values_variable_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_params template_params_param_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.variable_param_values
-    ADD CONSTRAINT variable_variable_param_values_variable_id_foreign FOREIGN KEY (variable_id) REFERENCES variable.variables(id) ON DELETE CASCADE;
-
-
---
--- Name: variables variable_variables_channel_id_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variable_variables_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_params
+    ADD CONSTRAINT template_params_param_type_id_foreign FOREIGN KEY (param_type_id) REFERENCES public.template_param_types(id);
 
 
 --
--- Name: variables variable_variables_key_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_params template_params_resolver_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variable_variables_key_foreign FOREIGN KEY (key) REFERENCES variable.definitions(key) ON DELETE CASCADE;
-
-
---
--- Name: variables variable_variables_project_uuid_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
---
-
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variable_variables_project_uuid_foreign FOREIGN KEY (project_uuid) REFERENCES public.projects(uuid) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_params
+    ADD CONSTRAINT template_params_resolver_foreign FOREIGN KEY (resolver) REFERENCES public.template_resolvers(key) ON DELETE CASCADE;
 
 
 --
--- Name: variables variable_variables_resolver_foreign; Type: FK CONSTRAINT; Schema: variable; Owner: root
+-- Name: template_variable_params template_variable_params_param_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
 --
 
-ALTER TABLE ONLY variable.variables
-    ADD CONSTRAINT variable_variables_resolver_foreign FOREIGN KEY (resolver) REFERENCES variable.resolvers(key) ON DELETE CASCADE;
+ALTER TABLE ONLY public.template_variable_params
+    ADD CONSTRAINT template_variable_params_param_id_foreign FOREIGN KEY (param_id) REFERENCES public.template_params(id) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variable_params template_variable_params_param_value_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variable_params
+    ADD CONSTRAINT template_variable_params_param_value_id_foreign FOREIGN KEY (param_value_id) REFERENCES public.template_param_values(id) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variable_params template_variable_params_variable_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variable_params
+    ADD CONSTRAINT template_variable_params_variable_id_foreign FOREIGN KEY (variable_id) REFERENCES public.template_variables(id) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variables template_variables_channel_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_channel_id_foreign FOREIGN KEY (channel_id) REFERENCES public.channels(id) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variables template_variables_key_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_key_foreign FOREIGN KEY (key) REFERENCES public.template_definitions(key) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variables template_variables_project_uuid_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_project_uuid_foreign FOREIGN KEY (project_uuid) REFERENCES public.projects(uuid) ON DELETE CASCADE;
+
+
+--
+-- Name: template_variables template_variables_resolver_foreign; Type: FK CONSTRAINT; Schema: public; Owner: sail
+--
+
+ALTER TABLE ONLY public.template_variables
+    ADD CONSTRAINT template_variables_resolver_foreign FOREIGN KEY (resolver) REFERENCES public.template_resolvers(key) ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict 5CCBfHHEcHvaC589XVMX54DraNqEIcu3GLm9yOYk65os1FXU8wUBsPSqEdXKn6z
 
